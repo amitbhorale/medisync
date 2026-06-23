@@ -1,0 +1,25 @@
+[build]
+  command = "npm run build"
+  publish = "client/dist"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Redirect all API requests to our serverless Express API function
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+# Redirect all file uploads requests to the serverless function to serve from /tmp/uploads
+[[redirects]]
+  from = "/uploads/*"
+  to = "/.netlify/functions/api/uploads/:splat"
+  status = 200
+
+# SPA routing: Redirect all other requests to index.html so React handles routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

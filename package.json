@@ -1,0 +1,23 @@
+{
+  "name": "medisync-root",
+  "version": "1.0.0",
+  "description": "MediSync Clinic Management & Telehealth System",
+  "private": true,
+  "scripts": {
+    "install-all": "npm install && npm install --prefix server && npm install --prefix client",
+    "server": "npm start --prefix server",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm run build --prefix client"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "lowdb": "^1.0.0",
+    "multer": "^1.4.5-lts.1",
+    "serverless-http": "^3.2.0"
+  }
+}

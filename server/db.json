@@ -1,0 +1,152 @@
+{
+  "users": [
+    {
+      "id": "usr_doc_1",
+      "username": "doctor",
+      "passwordHash": "$2a$10$2MxeS5gQZPOy628EuiYBfeYK9zz6cNX2uvA7GNWgFJPBLFh65W//q",
+      "role": "Doctor",
+      "name": "Dr. Sarah Connor",
+      "department": "Cardiology"
+    },
+    {
+      "id": "usr_doc_2",
+      "username": "pediatrician",
+      "passwordHash": "$2a$10$2MxeS5gQZPOy628EuiYBfeYK9zz6cNX2uvA7GNWgFJPBLFh65W//q",
+      "role": "Doctor",
+      "name": "Dr. Charles Xavier",
+      "department": "Pediatrics"
+    },
+    {
+      "id": "usr_stf_1",
+      "username": "staff",
+      "passwordHash": "$2a$10$2MxeS5gQZPOy628EuiYBfe04xJEdUMS0D12FPTiMs5Y4d/K9IXMVm",
+      "role": "Staff",
+      "name": "Emma Watson",
+      "department": "Reception"
+    },
+    {
+      "id": "usr_pat_1",
+      "username": "patient",
+      "passwordHash": "$2a$10$2MxeS5gQZPOy628EuiYBfen5lf2p3G5tg2FUbZam.8fLu/bvek78S",
+      "role": "Patient",
+      "name": "John Doe",
+      "department": "N/A"
+    }
+  ],
+  "patients": [
+    {
+      "id": "pat_1",
+      "name": "John Doe",
+      "age": 34,
+      "gender": "Male",
+      "phone": "+1 555-0199",
+      "address": "742 Evergreen Terrace, Springfield",
+      "medicalHistory": "Mild asthma, allergic to penicillin",
+      "documents": []
+    },
+    {
+      "id": "pat_2",
+      "name": "Jane Smith",
+      "age": 28,
+      "gender": "Female",
+      "phone": "+1 555-0245",
+      "address": "221B Baker St, London",
+      "medicalHistory": "No chronic diseases, blood type O+",
+      "documents": []
+    }
+  ],
+  "appointments": [
+    {
+      "id": "apt_1",
+      "patientId": "pat_1",
+      "patientName": "John Doe",
+      "doctorId": "usr_doc_1",
+      "doctorName": "Dr. Sarah Connor",
+      "department": "Cardiology",
+      "dateTime": "2026-06-24T10:00",
+      "priority": "Normal",
+      "status": "Scheduled"
+    },
+    {
+      "id": "apt_2",
+      "patientId": "pat_2",
+      "patientName": "Jane Smith",
+      "doctorId": "usr_doc_2",
+      "doctorName": "Dr. Charles Xavier",
+      "department": "Pediatrics",
+      "dateTime": "2026-06-25T14:30",
+      "priority": "Critical",
+      "status": "Scheduled"
+    }
+  ],
+  "prescriptions": [],
+  "billing": [
+    {
+      "id": "inv_1",
+      "patientId": "pat_1",
+      "patientName": "John Doe",
+      "date": "2026-06-22",
+      "consultationFee": 100,
+      "medicineCharges": [
+        {
+          "name": "Paracetamol 650mg",
+          "price": 10
+        }
+      ],
+      "status": "Paid"
+    }
+  ],
+  "inventory": [
+    {
+      "id": "inv_1",
+      "name": "Amoxicillin 500mg",
+      "stock": 15,
+      "minThreshold": 25,
+      "expiryDate": "2027-05-12",
+      "unitPrice": 15
+    },
+    {
+      "id": "inv_2",
+      "name": "Paracetamol 650mg",
+      "stock": 150,
+      "minThreshold": 30,
+      "expiryDate": "2028-10-20",
+      "unitPrice": 5
+    },
+    {
+      "id": "inv_3",
+      "name": "Ibuprofen 400mg",
+      "stock": 8,
+      "minThreshold": 20,
+      "expiryDate": "2027-02-15",
+      "unitPrice": 8
+    },
+    {
+      "id": "inv_4",
+      "name": "Metformin 500mg",
+      "stock": 85,
+      "minThreshold": 20,
+      "expiryDate": "2026-12-31",
+      "unitPrice": 12
+    },
+    {
+      "id": "inv_5",
+      "name": "Atorvastatin 20mg",
+      "stock": 40,
+      "minThreshold": 15,
+      "expiryDate": "2027-09-08",
+      "unitPrice": 22
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "log_1782216502385_0wlnvnku7",
+      "timestamp": "2026-06-23T12:08:22.385Z",
+      "userId": "usr_doc_1",
+      "userName": "Dr. Sarah Connor",
+      "role": "Doctor",
+      "action": "USER_LOGIN",
+      "details": "User doctor logged in successfully."
+    }
+  ]
+}
