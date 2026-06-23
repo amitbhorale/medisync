@@ -1,5 +1,12 @@
 // Centralized Client API Service
 
+const API_BASE = import.meta.env.VITE_API_URL || '';
+
+const fetchApi = (endpoint, options = {}) => {
+  const url = endpoint.startsWith('http') ? endpoint : `${API_BASE}${endpoint}`;
+  return window.fetch(url, options);
+};
+
 const getAuthHeaders = () => {
   const token = localStorage.getItem('medisync_token');
   return token ? { 'Authorization': `Bearer ${token}` } : {};
@@ -16,7 +23,7 @@ const handleResponse = async (res) => {
 export const api = {
   // Auth
   login: async (username, password) => {
-    const res = await fetch('/api/auth/login', {
+    const res = await fetchApi('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
@@ -25,7 +32,7 @@ export const api = {
   },
 
   register: async (patientData) => {
-    const res = await fetch('/api/auth/register', {
+    const res = await fetchApi('/api/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(patientData)
@@ -35,14 +42,14 @@ export const api = {
 
   // Patients
   getPatients: async (search = '') => {
-    const res = await fetch(`/api/patients?search=${encodeURIComponent(search)}`, {
+    const res = await fetchApi(`/api/patients?search=${encodeURIComponent(search)}`, {
       headers: getAuthHeaders()
     });
     return handleResponse(res);
   },
 
   createPatient: async (patientData) => {
-    const res = await fetch('/api/patients', {
+    const res = await fetchApi('/api/patients', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -57,7 +64,7 @@ export const api = {
     const formData = new FormData();
     formData.append('document', file);
 
-    const res = await fetch(`/api/patients/${patientId}/upload`, {
+    const res = await fetchApi(`/api/patients/${patientId}/upload`, {
       method: 'POST',
       headers: getAuthHeaders(), // Fetch auto-adds Multipart Boundary header when body is FormData
       body: formData
@@ -67,14 +74,14 @@ export const api = {
 
   // Appointments
   getAppointments: async () => {
-    const res = await fetch('/api/appointments', {
+    const res = await fetchApi('/api/appointments', {
       headers: getAuthHeaders()
     });
     return handleResponse(res);
   },
 
   createAppointment: async (appointmentData) => {
-    const res = await fetch('/api/appointments', {
+    const res = await fetchApi('/api/appointments', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +93,7 @@ export const api = {
   },
 
   updateAppointmentStatus: async (id, status) => {
-    const res = await fetch(`/api/appointments/${id}`, {
+    const res = await fetchApi(`/api/appointments/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -99,14 +106,14 @@ export const api = {
 
   // Prescriptions
   getPrescriptions: async () => {
-    const res = await fetch('/api/prescriptions', {
+    const res = await fetchApi('/api/prescriptions', {
       headers: getAuthHeaders()
     });
     return handleResponse(res);
   },
 
   createPrescription: async (prescriptionData) => {
-    const res = await fetch('/api/prescriptions', {
+    const res = await fetchApi('/api/prescriptions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -119,14 +126,14 @@ export const api = {
 
   // Billing
   getBilling: async () => {
-    const res = await fetch('/api/billing', {
+    const res = await fetchApi('/api/billing', {
       headers: getAuthHeaders()
     });
     return handleResponse(res);
   },
 
   createBilling: async (billingData) => {
-    const res = await fetch('/api/billing', {
+    const res = await fetchApi('/api/billing', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -138,7 +145,7 @@ export const api = {
   },
 
   payBilling: async (id) => {
-    const res = await fetch(`/api/billing/${id}/pay`, {
+    const res = await fetchApi(`/api/billing/${id}/pay`, {
       method: 'PATCH',
       headers: getAuthHeaders()
     });
@@ -147,14 +154,14 @@ export const api = {
 
   // Inventory
   getInventory: async () => {
-    const res = await fetch('/api/inventory', {
+    const res = await fetchApi('/api/inventory', {
       headers: getAuthHeaders()
     });
     return handleResponse(res);
   },
 
   updateInventoryItem: async (id, itemData) => {
-    const res = await fetch(`/api/inventory/${id}`, {
+    const res = await fetchApi(`/api/inventory/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -166,7 +173,7 @@ export const api = {
   },
 
   createInventoryItem: async (itemData) => {
-    const res = await fetch('/api/inventory', {
+    const res = await fetchApi('/api/inventory', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -179,7 +186,7 @@ export const api = {
 
   // Audit Logs
   getAuditLogs: async () => {
-    const res = await fetch('/api/audit-logs', {
+    const res = await fetchApi('/api/audit-logs', {
       headers: getAuthHeaders()
     });
     return handleResponse(res);
@@ -187,7 +194,7 @@ export const api = {
 
   // AI Symptom Engine
   checkSymptoms: async (symptoms) => {
-    const res = await fetch('/api/ai/symptom-check', {
+    const res = await fetchApi('/api/ai/symptom-check', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ symptoms })
